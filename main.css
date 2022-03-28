@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --------Start Header-------- */
+.container {
+  @apply max-w-full m-auto;
+}
+.logo {
+  @apply bg-[#272f54] py-4;
+}
+.menu_link {
+  @apply px-5 py-3 block text-sm text-white hover:text-black;
+}
+.input_search {
+  @apply w-60 mx-5 outline-0;
+}
+.btn-input {
+  @apply border w-24 bg-[#272f54] text-white;
+}
+/* -------End header--------- */
+
+/* ------Start Main---------- */
+.title-item {
+  @apply text-xl font-bold uppercase my-5;
+}
+.item-cols {
+  @apply grid grid-cols-3 gap-7;
+}
+.title-documment {
+  @apply my-3 text-lg text-[#b14a0f] font-bold;
+}
+.main-documment {
+  @apply text-xs font-medium my-5 leading-4;
+}
+/* ------End Main---------- */
+
+/* ------Start Footer---------- */
+
+.footer {
+  @apply text-center mt-4 bg-[#272f54] py-3 uppercase px-3 text-white text-sm;
+}
+
+/* ------End Footer---------- */
