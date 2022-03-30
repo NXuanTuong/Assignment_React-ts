@@ -16,7 +16,7 @@ const Header = (props: Props) => {
                     <li className="inline-block relative z-10"><a className="text-[#141517] text-lg font-semibold block font-['Josefin Sans','sans-serif'] px-5 py-10 capitalize hover:text-red-500 transition-all delay-200 ease-out outline-none cursor-pointer" href="/">Home</a></li>
                     <li className="inline-block relative z-10"><a className="text-[#141517] text-lg font-semibold block font-['Josefin Sans','sans-serif'] px-5 py-10 capitalize hover:text-red-500 transition-all delay-200 ease-out outline-none cursor-pointer" href="/product">Shop</a></li>
                     <li className="inline-block relative z-10"><a className="text-[#141517] text-lg font-semibold block font-['Josefin Sans','sans-serif'] px-5 py-10 capitalize hover:text-red-500 transition-all delay-200 ease-out outline-none cursor-pointer" href="/about">About</a></li>
-                    <li className="inline-block relative z-10"><a className="text-[#141517] text-lg font-semibold block font-['Josefin Sans','sans-serif'] px-5 py-10 capitalize hover:text-red-500 transition-all delay-200 ease-out outline-none cursor-pointer" href="/news">Blog</a></li>
+                    <li className="inline-block relative z-10"><a className="text-[#141517] text-lg font-semibold block font-['Josefin Sans','sans-serif'] px-5 py-10 capitalize hover:text-red-500 transition-all delay-200 ease-out outline-none cursor-pointer" href="/blog">Blog</a></li>
                     <li className="inline-block relative z-10"><a className="text-[#141517] text-lg font-semibold block font-['Josefin Sans','sans-serif'] px-5 py-10 capitalize hover:text-red-500 transition-all delay-200 ease-out outline-none cursor-pointer" href="/contact">Contact</a></li>
                 </ul>
                 </div>
@@ -25,7 +25,7 @@ const Header = (props: Props) => {
                     <li>
                     <div className="inline-block">
                         <span className="text-black text-base font-semibol px-4 py-3">
-                        <i className="fas fa-user" /> 
+                        <i className="fas fa-user px-4" /> 
                         <span>
                             <a href="/#/signin" className="hover:text-red-500 cursor-pointer">Log In</a></span> 
                         <span>/</span> 
