@@ -1,19 +1,24 @@
 import { useEffect, useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { signup } from './api/auth'
-import { listCate, removeCate } from './api/category'
+import { createCate, listCate, removeCate, updateCate } from './api/category'
 import { create, list, remove, update } from './api/product'
 import Dashboard from './components/Admin/Dashboard'
+import PrivateRouter from './components/client/PrivateRouter'
+import CategoryAdd from './Pages/Admin/Categories/CategoryAdd'
+import CategoryEdit from './Pages/Admin/Categories/CategoryEdit'
 import CategoryManager from './Pages/Admin/Categories/CategoryManager'
 import ProductAdd from './Pages/Admin/Products/ProductAdd'
 import ProductEdit from './Pages/Admin/Products/ProductEdit'
 import ProductManager from './Pages/Admin/Products/ProductManager'
 import WebsiteAdmin from './Pages/Admin/WebsiteAdmin'
+import Signin from './Pages/auth/Signin'
 import Signup from './Pages/auth/Signup'
 import AboutPage from './Pages/Users/AboutPage'
 import BlogPage from './Pages/Users/BlogPage'
 import ContactPage from './Pages/Users/ContactPage'
 import HomePage from './Pages/Users/HomePage'
+import ProductDetail from './Pages/Users/ProductDetail'
 import ProductList from './Pages/Users/ProductList'
 import WebsiteUser from './Pages/Users/WebsiteUser'
 import { CategoryType } from './Types/Category'
@@ -67,6 +72,16 @@ function App() {
 
     setCategories(categories.filter(item => item._id !== id))
   }
+
+  const onHandleAddCate = async (category: CategoryType) => {
+    const {data} = await createCate(category)
+    setCategories([...categories, data])
+  }
+
+  const onHandleUpdateCate = async (category: CategoryType) => {
+    const {data} = await updateCate(category)
+    setCategories(categories.map(item => item._id === data.id ? category : item))
+  }
   return (
     <div className="App">
         <Routes>
@@ -84,9 +99,10 @@ function App() {
             <Route path='contact'>
               <Route index element={<ContactPage />}></Route>
             </Route>
+          <Route path='details_product/:id' element={<ProductDetail />}></Route>
           </Route>
 
-          <Route path='/admin' element={<WebsiteAdmin />}>
+          <Route path='/admin' element={<PrivateRouter><WebsiteAdmin /></PrivateRouter>}>
             <Route index element={<Navigate to='dasboard' />}></Route>
             <Route path='dasboard' element={<Dashboard />}></Route>
             <Route path='products'>
@@ -97,10 +113,13 @@ function App() {
 
             <Route path='category'>
               <Route index element={<CategoryManager onRemoveCate={onHandRemoveCate} category={categories}/>}></Route>
+              <Route path='add' element={<CategoryAdd onAddCate={onHandleAddCate} />}></Route>
+              <Route path=':id/edit' element={<CategoryEdit onUpdateCate={onHandleUpdateCate} />}></Route>
             </Route>
           </Route>
 
           <Route path='signup' element={<Signup onSignup={onHandleSignup}/>}></Route>
+          <Route path='signin' element={<Signin />}></Route>
         </Routes>
     </div>
   )

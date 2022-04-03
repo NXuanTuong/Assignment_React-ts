@@ -1,26 +1,28 @@
 import React from 'react'
-import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { Users } from '../../Types/User'
+import { signin } from '../../api/auth'
 
 type Inputs = {
-    fullname: string,
     email: string,
     password: string
 }
 
-type SignupProps = {
-    onSignup: (user: Users) => void
-}
+type Props = {}
 
-const Signup = (props: SignupProps) => {
+const Signin = (props: Props) => {
     const {register, handleSubmit, formState: {errors}} = useForm<Inputs>()
     const navigate = useNavigate()
-
-    const onSubmit : SubmitHandler<Inputs> = (dataInput) => {
-        props.onSignup(dataInput)
-
-        navigate("/signin")
+    const onSubmit : SubmitHandler<Inputs> = async (dataInput) => {
+        const {data} = await signin(dataInput)
+        if(data) {
+            localStorage.setItem("user", JSON.stringify(data.user))
+            if(data.user.role === 1) {
+                navigate("/admin")
+            } else {
+                navigate("/")
+            }
+        }
     }
   return (
     <div>
@@ -45,10 +47,6 @@ const Signup = (props: SignupProps) => {
             </div>
             <form  className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <input type="hidden" name="remember" defaultValue="true" />
-            <div className="relative">
-                <label className="text-sm font-bold text-gray-700 tracking-wide">Full Name</label>
-                <input id="name" {...register("fullname")} className=" w-full text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" type="text" placeholder="VD: Nguyen Van A" />
-            </div>
             <div className="relative">
                 <label className="text-sm font-bold text-gray-700 tracking-wide">Email</label>
                 <input id="email" {...register("email")} className=" w-full text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" type="text" placeholder="VD: mail@gmail.com"  />
@@ -85,4 +83,4 @@ const Signup = (props: SignupProps) => {
   )
 }
 
-export default Signup
+export default Signin

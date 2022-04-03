@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { ProductType } from '../Types/Product'
 
-type Props = {}
+type ListProductProps = {
+  products: ProductType[]
+}
 
-const ListProduct = (props: Props) => {
+const ListProduct = (props: ListProductProps) => {
   return (
     <div>
   <div className="flex justify-between px-[123px] bg-[#eff5f8] items-center">
@@ -150,9 +154,10 @@ const ListProduct = (props: Props) => {
       <div>
         <div>
           <div className="grid grid-cols-3 mb-5 gap-10" id="product">
-            <div className="px-3 py-7 shadow hover:shadow-lg product_item">
+            {props.products?.map((item) => {
+              return <div className="px-3 py-7 shadow hover:shadow-lg product_item">
               <div className="relative overflow-hidden">
-                <img src="https://picsum.photos/200" className="object-cover w-full h-64" />
+                <img src={`${item.img}`} className="object-cover w-full h-64" />
                 <span className="absolute top-[5%] px-5 rounded-2xl text-white bg-red-300 py-1 border -left-[5%]"><p>20%</p></span>
                 <span className="text-black icon_heart cursor-pointer absolute text-2xl -top-[2%] right-[9px] hover:text-red-500"><i className="bi bi-heart" /></span>
                 <div className="absolute top-[47%] -left-[5%] mx-5 feedback_item_product">
@@ -170,19 +175,16 @@ const ListProduct = (props: Props) => {
               </div>
               <div>
                 <div>
-                <h3 className="text-base mb-2 font-semibold text-center overflow-ellipsis w-75 whitespace-nowrap overflow-hidden"><a href="/#/details_product/" /></h3>
+                <h3 className="text-base mb-2 font-semibold text-center overflow-ellipsis w-75 whitespace-nowrap overflow-hidden"><Link to={`/details_product/${item._id}`}>{item.name}</Link></h3>
                 <div className="flex justify-center items-center">
-                    <del className="text-red-300"><span>$</span>200.000</del>
+                    <del className="text-red-300"><span>$</span>{item.price}</del>
                     <p className="px-2 font-semibold text-lg"><span>$</span>300.000</p>
                 </div>
                 </div>
               </div>
             </div>
+          })}  
           </div>
-        </div>
-        <div className="text-center mt-12">
-          <ul className="block">
-          </ul>
         </div>
       </div>
     </div>
