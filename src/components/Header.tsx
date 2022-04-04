@@ -27,10 +27,10 @@ const Header = (props: Props) => {
                         <span className="text-black text-base font-semibol px-4 py-3">
                         <i className="fas fa-user px-4" /> 
                         <span>
-                            <a href="/#/signin" className="hover:text-red-500 cursor-pointer">Log In</a></span> 
+                            <a href="/signin" className="hover:text-red-500 cursor-pointer">Log In</a></span> 
                         <span>/</span> 
                         <span>
-                            <a href="/#/signup" className="hover:text-red-500 cursor-pointer">Register</a>
+                            <a href="/signup" className="hover:text-red-500 cursor-pointer">Register</a>
                         </span> 
                         </span>
                     </div>

@@ -6,10 +6,11 @@ type PrivateRouterProps = {
 }
 
 const PrivateRouter = (props: PrivateRouterProps, {}) => {
-  
-  return (
-    props.children
-  )
+  const isAdmin = true;
+  if (!isAdmin) {
+      return <Navigate to="/signin" />
+  }
+  return props.children
 }
 
 export default PrivateRouter

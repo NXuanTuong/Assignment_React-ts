@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { signup } from './api/auth'
+import { getAll, signup } from './api/auth'
 import { createCate, listCate, removeCate, updateCate } from './api/category'
 import { create, list, remove, update } from './api/product'
 import Dashboard from './components/Admin/Dashboard'
@@ -11,6 +11,8 @@ import CategoryManager from './Pages/Admin/Categories/CategoryManager'
 import ProductAdd from './Pages/Admin/Products/ProductAdd'
 import ProductEdit from './Pages/Admin/Products/ProductEdit'
 import ProductManager from './Pages/Admin/Products/ProductManager'
+import ListUser from './Pages/Admin/User/ListUser'
+import UserEdit from './Pages/Admin/User/UserEdit'
 import WebsiteAdmin from './Pages/Admin/WebsiteAdmin'
 import Signin from './Pages/auth/Signin'
 import Signup from './Pages/auth/Signup'
@@ -46,6 +48,13 @@ function App() {
     getCategory()
   }, [])
 
+  useEffect(() => {
+    const getUser = async () => {
+      const {data} = await getAll()
+      setUser(data)
+    }
+    getUser()
+  }, [])
   const onHandleAdd = async (product: ProductType) => {
     const {data} = await create(product)
     setProducts([...products, data]);
@@ -106,7 +115,7 @@ function App() {
             <Route index element={<Navigate to='dasboard' />}></Route>
             <Route path='dasboard' element={<Dashboard />}></Route>
             <Route path='products'>
-              <Route index element={<ProductManager onRemove={onHandRemove} products={products}/>}></Route>
+              <Route index element={<ProductManager categories={categories} onRemove={onHandRemove} products={products}/>}></Route>
               <Route path='add' element={<ProductAdd onAdd={onHandleAdd} />}></Route>
               <Route path=':id/edit' element={<ProductEdit onUpdate={onHandleUpdate} />}></Route>
             </Route>
@@ -115,6 +124,11 @@ function App() {
               <Route index element={<CategoryManager onRemoveCate={onHandRemoveCate} category={categories}/>}></Route>
               <Route path='add' element={<CategoryAdd onAddCate={onHandleAddCate} />}></Route>
               <Route path=':id/edit' element={<CategoryEdit onUpdateCate={onHandleUpdateCate} />}></Route>
+            </Route>
+
+            <Route path='users'>
+              <Route index element={<ListUser users={users}/>}></Route>
+              <Route path=':id/edit' element={<UserEdit />}></Route>
             </Route>
           </Route>
 

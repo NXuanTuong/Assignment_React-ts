@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { CategoryType } from '../Types/Category'
 import { ProductType } from '../Types/Product'
 
 type ListProductProps = {
   products: ProductType[]
+  categories: CategoryType[]
 }
 
 const ListProduct = (props: ListProductProps) => {
@@ -46,7 +48,10 @@ const ListProduct = (props: ListProductProps) => {
           </ul>
           <div className="border p-5 bg-[#fbf9ff] shadow-md">
             <ul>
-              <li className="mb-2 border-b py-2"><a className="text-base cursor-pointer hover:text-red-500 font-semibold leading-4">Sam Sung</a></li> 
+              {props.categories.map(item => {
+              return  <li className="mb-2 border-b py-2"><a className="text-base cursor-pointer hover:text-red-500 font-semibold leading-4">{item.name}</a></li> 
+              
+              })}
             </ul>
           </div>
         </div>

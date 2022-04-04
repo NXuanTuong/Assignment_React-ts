@@ -1,6 +1,8 @@
 export type Users = {
+    _id?: string,
     fullname: string,
     email: string,
     password: string,
-    role: 0
+    role: number,
+    status: number
 }
