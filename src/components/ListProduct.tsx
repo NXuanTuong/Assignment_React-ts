@@ -9,6 +9,7 @@ type ListProductProps = {
 }
 
 const ListProduct = (props: ListProductProps) => {
+  const [searchTerm, setSearchTem] = useState("")
   return (
     <div>
   <div className="flex justify-between px-[123px] bg-[#eff5f8] items-center">
@@ -43,14 +44,13 @@ const ListProduct = (props: ListProductProps) => {
           <ul>
             <form id="search" className="bg-gray-300 border list-item px-5 rounded-md py-[8px] px-[7px] duration-1000 my-2">
               <button><i className="bi bi-search" /></button>
-              <input id="productSeach" placeholder="Men's watch..." className="border-none bg-transparent w-[250px] px-2 outline-none"/>
+              <input id="productSeach" onChange={(event) => setSearchTem(event.target.value)} placeholder="Men's watch..." className="border-none bg-transparent w-[250px] px-2 outline-none"/>
             </form>
           </ul>
           <div className="border p-5 bg-[#fbf9ff] shadow-md">
             <ul>
               {props.categories.map(item => {
               return  <li className="mb-2 border-b py-2"><a className="text-base cursor-pointer hover:text-red-500 font-semibold leading-4">{item.name}</a></li> 
-              
               })}
             </ul>
           </div>
@@ -158,11 +158,17 @@ const ListProduct = (props: ListProductProps) => {
       {/* Start Grid-2 */}
       <div>
         <div>
-          <div className="grid grid-cols-3 mb-5 gap-10" id="product">
-            {props.products?.map((item) => {
+        <div className="grid grid-cols-3 mb-5 gap-10" id="product">
+          {props.products.filter((val) => {
+            if(searchTerm == "") {
+              return val
+            } else if (val.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+              return val
+            }
+          }).map((val, key) => {
               return <div className="px-3 py-7 shadow hover:shadow-lg product_item">
               <div className="relative overflow-hidden">
-                <img src={`${item.img}`} className="object-cover w-full h-64" />
+                <img src={`${val.img}`} className="object-cover w-full h-64" />
                 <span className="absolute top-[5%] px-5 rounded-2xl text-white bg-red-300 py-1 border -left-[5%]"><p>20%</p></span>
                 <span className="text-black icon_heart cursor-pointer absolute text-2xl -top-[2%] right-[9px] hover:text-red-500"><i className="bi bi-heart" /></span>
                 <div className="absolute top-[47%] -left-[5%] mx-5 feedback_item_product">
@@ -180,9 +186,9 @@ const ListProduct = (props: ListProductProps) => {
               </div>
               <div>
                 <div>
-                <h3 className="text-base mb-2 font-semibold text-center overflow-ellipsis w-75 whitespace-nowrap overflow-hidden"><Link to={`/details_product/${item._id}`}>{item.name}</Link></h3>
+                <h3 className="text-base mb-2 font-semibold text-center overflow-ellipsis w-75 whitespace-nowrap overflow-hidden"><Link to={`/details_product/${val._id}`}>{val.name}</Link></h3>
                 <div className="flex justify-center items-center">
-                    <del className="text-red-300"><span>$</span>{item.price}</del>
+                    <del className="text-red-300"><span>$</span>{val.price}</del>
                     <p className="px-2 font-semibold text-lg"><span>$</span>300.000</p>
                 </div>
                 </div>

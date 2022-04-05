@@ -55,6 +55,7 @@ function App() {
     }
     getUser()
   }, [])
+  
   const onHandleAdd = async (product: ProductType) => {
     const {data} = await create(product)
     setProducts([...products, data]);

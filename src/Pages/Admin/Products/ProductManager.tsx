@@ -101,7 +101,7 @@ const ProductManager = ({products, categories, onRemove}: ProductManagerProps) =
                             Price Old
                             </th>
                             <th scope="col" className="p-6 text-center text-xs font-medium text-gray-500 uppercase">
-                            Price New
+                            Desc
                             </th>
                             <th scope="col" className="p-6 text-center text-xs font-medium text-gray-500 uppercase">
                             Category

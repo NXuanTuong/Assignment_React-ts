@@ -31,19 +31,23 @@ const ProductAdd = (props: ProductAddProps) => {
                 <div className="grid grid-cols-6 gap-6">
                     <div className="col-span-6 sm:col-span-3">
                     <label htmlFor="title" className="block text-sm font-medium text-gray-700">Name<span className="text-red-400">*</span></label>
-                    <input {...register("name")} placeholder="Enter your name" type="text"   className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-10 shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                    <input {...register("name" , {required: true})} placeholder="Enter your name" type="text"   className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-10 shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                    {errors.name && <span>Bắt buộc phải nhập trường này!</span>}
                     </div>
                     <div className="col-span-6 sm:col-span-3">
                     <label htmlFor="content" className="block text-sm font-medium text-gray-700">Price<span className="text-red-400">*</span></label>
-                    <input {...register("price")} type="number"   placeholder="Enter your price" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block p-3 w-full h-10 shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                    <input {...register("price" , {required: true})} type="number"   placeholder="Enter your price" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block p-3 w-full h-10 shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                    {errors.price && <span>Bắt buộc phải nhập trường này!</span>}
                     </div>
                     <div className="col-span-6 sm:col-span-3">
                     <label htmlFor="image" className="block text-sm font-medium text-gray-700">Image<span className="text-red-400">*</span></label>
-                    <input {...register("img")} type="text" placeholder="Enter your img" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 p-3 block w-full h-10 shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                    <input {...register("img" , {required: true})} type="text" placeholder="Enter your img" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 p-3 block w-full h-10 shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                    {errors.img && <span>Bắt buộc phải nhập trường này!</span>}
                     </div>
                     <div className="col-span-6 sm:col-span-3">
                     <label htmlFor="image" className="block text-sm font-medium text-gray-700">Desc<span className="text-red-400">*</span></label>
-                    <input {...register("desc")} type="text"   placeholder="Enter your desc" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 p-3 block w-full h-10 shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                    <input {...register("desc", {required: true})} type="text"   placeholder="Enter your desc" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 p-3 block w-full h-10 shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                    {errors.desc && <span>Bắt buộc phải nhập trường này!</span>}
                     </div>
                 </div>
                 </div>
