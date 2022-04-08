@@ -1,8 +1,14 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {}
 
 const Header = (props: Props) => {
+    const navigate = useNavigate()
+    const logout = () => {
+        localStorage.removeItem("user")
+        navigate("/")
+    }
   return (
     <header id="header">
         <div className="px-3">
@@ -23,19 +29,33 @@ const Header = (props: Props) => {
                 <div>
                 <ul className="list-none items-center m-0 p-0 flex justify-between">
                     <li>
-                    <div className="inline-block">
+                    {localStorage.getItem("user") ? 
+                        <div className="inline-block">
+                        <span className="text-black text-base font-semibol">
+                        <i className="fas fa-user px-4" /> 
+                        <span>
+                            {JSON.parse(localStorage.getItem("user") as string)?.email}</span> 
+                        <span>/</span> 
+                        <div>
+                            <div onClick={() => logout()} className="hover:text-red-500 cursor-pointer">Logout</div>
+                        </div> 
+                        </span>
+                        </div> :
+                        <div className="inline-block">
                         <span className="text-black text-base font-semibol px-4 py-3">
                         <i className="fas fa-user px-4" /> 
                         <span>
-                            <a href="/signin" className="hover:text-red-500 cursor-pointer">Log In</a></span> 
+                            <a href="/signin" className="hover:text-red-500 cursor-pointer">Sign in</a></span> 
                         <span>/</span> 
                         <span>
-                            <a href="/signup" className="hover:text-red-500 cursor-pointer">Register</a>
+                            <a href="/signup" className="hover:text-red-500 cursor-pointer">Create account</a>
                         </span> 
                         </span>
-                    </div>
+                        </div>
+                    }
+                    
                     </li>
-                    <li className="list-item"><a href="/#/cart">
+                    <li className="list-item"><a href="/cart">
                         <span className="text-black relative text-lg font-semibol px-4 py-3 cursor-pointer">
                         <i className="fas fa-shopping-cart" />
                         <div id="cartID" className="boder absolute border-red-500 bg-red-500 rounded-full px-2 py-1 -top-[2px] right-[5px] text-white text-xs text-center">1</div>

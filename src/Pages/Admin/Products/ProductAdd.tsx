@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { listCate } from '../../../api/category'
+import { CategoryType } from '../../../Types/Category'
 import { ProductType } from '../../../Types/Product'
 
 type Inputs = {
     name: string,
     price: number,
     desc: string,
-    img: string
+    img: string,
+    category: string
 }
 
 type ProductAddProps = {
@@ -15,8 +18,17 @@ type ProductAddProps = {
 }
 
 const ProductAdd = (props: ProductAddProps) => {
+    const [categories, setCategories] = useState<CategoryType[]>([])
     const { register, handleSubmit, formState: {errors} } = useForm<Inputs>()
     const navigate = useNavigate()
+
+    useEffect(() => {
+        const getCategoryPro = async () => {
+            const {data} = await listCate()
+            setCategories(data)
+        }
+        getCategoryPro()
+    }, [])
     const onSubmit: SubmitHandler<Inputs> = (datainput) => {
         props.onAdd(datainput)
         navigate("/admin/products")
@@ -48,6 +60,30 @@ const ProductAdd = (props: ProductAddProps) => {
                     <label htmlFor="image" className="block text-sm font-medium text-gray-700">Desc<span className="text-red-400">*</span></label>
                     <input {...register("desc", {required: true})} type="text"   placeholder="Enter your desc" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 p-3 block w-full h-10 shadow-sm sm:text-sm border-gray-300 rounded-md" />
                     {errors.desc && <span>Bắt buộc phải nhập trường này!</span>}
+                    </div>
+                    <div className="col-span-6 sm:col-span-3">
+                    <label htmlFor="image" className="block text-sm font-medium text-gray-700">Desc<span className="text-red-400">*</span></label>
+                    <select
+                    {...register("category", { required: true })}
+                    className="selected-cate form-select appearance-none block 
+                                            w-full
+                                            px-3
+                                            py-[4px]
+                                            text-base
+                                            font-normal
+                                            text-gray-700
+                                            bg-white bg-clip-padding bg-no-repeat
+                                            border border-solid border-gray-300
+                                            rounded
+                                            transition
+                                            ease-in-out
+                                            m-0
+                                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  aria-label="Default select example">
+                  {categories.map((item) => {
+                    return <option className="" value={item._id}>{item.name}</option>
+                  })}
+                </select>
                     </div>
                 </div>
                 </div>

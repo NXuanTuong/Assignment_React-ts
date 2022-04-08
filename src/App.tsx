@@ -18,6 +18,7 @@ import Signin from './Pages/auth/Signin'
 import Signup from './Pages/auth/Signup'
 import AboutPage from './Pages/Users/AboutPage'
 import BlogPage from './Pages/Users/BlogPage'
+import Cart from './Pages/Users/Cart'
 import ContactPage from './Pages/Users/ContactPage'
 import HomePage from './Pages/Users/HomePage'
 import ProductDetail from './Pages/Users/ProductDetail'
@@ -110,6 +111,7 @@ function App() {
               <Route index element={<ContactPage />}></Route>
             </Route>
           <Route path='details_product/:id' element={<ProductDetail />}></Route>
+          <Route path='cart' element={<Cart />}></Route>
           </Route>
 
           <Route path='/admin' element={<PrivateRouter><WebsiteAdmin /></PrivateRouter>}>
