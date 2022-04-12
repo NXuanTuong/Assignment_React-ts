@@ -1,18 +1,20 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import { read } from '../api/product'
 import { CategoryType } from '../Types/Category'
 import { ProductType } from '../Types/Product'
 import Search from './Search'
 
 type ListProductProps = {
-  
+  products: ProductType[]
 }
 
 const ListProduct = (props: ListProductProps) => {
   const [products, setProduct] = useState<ProductType[]>([])
   const [categories, setCategories] = useState<CategoryType[]>([])
   const [searchTerm, setSearchTem] = useSearchParams()
+  const [newProduct, setnewProduct] = useState<ProductType[]>([])
   const q = searchTerm.get("q")
 
   useEffect(() => {
@@ -24,7 +26,6 @@ const ListProduct = (props: ListProductProps) => {
         const {data} = await axios.get(`http://localhost:4000/api/products`)
         setProduct(data)
       }
-     
     } 
     getProducts()
   }, [q])
@@ -36,6 +37,28 @@ const ListProduct = (props: ListProductProps) => {
     }
     getCategories()
   }, [])
+  useEffect(() => {
+    const getNewProduct = async () => {
+      const {data} = await axios.get(`http://localhost:4000/api/products?limit=4`)
+      setnewProduct(data)
+    }
+    getNewProduct()
+    const getNextPage1 = async () => {
+      const {data} = await axios.get(`http://localhost:4000/api/products?page=1`)
+      setProduct(data)
+    }
+    getNextPage1()
+  }, [])
+  const getNextPage = async (pageNumber: number) => {
+    const {data} = await axios.get(`http://localhost:4000/api/products?page=${pageNumber}`)
+    setProduct(data)
+    console.log(data);
+  }
+
+  const addCart = async (id: string) => {
+    const {data} = await read(id)
+    console.log(data);
+  }
   return (
     <div>
   <div className="flex justify-between px-[123px] bg-[#eff5f8] items-center">
@@ -186,7 +209,6 @@ const ListProduct = (props: ListProductProps) => {
         <div>
         <div className="grid grid-cols-3 mb-5 gap-10" id="product">
           {products.map((product: ProductType, index) => {
-            console.log(product);
               return <div key={index} className="px-3 py-7 shadow hover:shadow-lg product_item">
               <div className="relative overflow-hidden">
                 <img src={`${product.img}`} className="object-cover w-full h-64" />
@@ -202,7 +224,7 @@ const ListProduct = (props: ListProductProps) => {
                   </ul>
                 </div>
                 <div className="hover:bg-red-500 btn_add_cart cursor-pointer top-[80%] left-[20%] delay-150 duration-200 ease-in-out py-1 px-3 rounded-md text-red-500 hover:text-white border border-red-400 font-semibold uppercase absolute">
-                  <a>Add to Cart <span><i className="fas fa-shopping-cart" /></span></a>
+                  <button onClick={() => addCart(id)}>Add to Cart <span><i className="fas fa-shopping-cart" /></span></button>
                 </div>
               </div>
               <div>
@@ -220,9 +242,15 @@ const ListProduct = (props: ListProductProps) => {
         </div>
         <div className="text-center">
           <ul className="block">
-            <li className="inline-block px-4 py-2 border"><a className="text-[#777]" href="#"><i className="fas fa-angle-left" /></a></li>
-            <li className="inline-block px-4 py-2 border"><a className="text-[#777]" href="#">1</a></li>
-            <li className="inline-block px-4 py-2 border"><a className="text-[#777]" href="#">2</a></li>
+            <li className="inline-block px-4 py-2 border">
+              <a className="text-[#777]" href="#"><i className="fas fa-angle-left" /></a>
+            </li>
+            <li className="inline-block px-4 py-2 border">
+              <button className="text-[#777]" onClick={() => getNextPage(1)}>1</button>
+              </li>
+            <li className="inline-block px-4 py-2 border">
+              <button className="text-[#777]" onClick={() => getNextPage(2)}>2</button>
+              </li>
             <li className="inline-block px-4 py-2 border"><a className="text-[#777]" href="#"><i className="fas fa-angle-right" /></a></li>
           </ul>
         </div>

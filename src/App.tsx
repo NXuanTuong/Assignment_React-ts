@@ -23,6 +23,7 @@ import ContactPage from './Pages/Users/ContactPage'
 import HomePage from './Pages/Users/HomePage'
 import ProductDetail from './Pages/Users/ProductDetail'
 import ProductList from './Pages/Users/ProductList'
+import Profile from './Pages/Users/Profile'
 import WebsiteUser from './Pages/Users/WebsiteUser'
 import { CategoryType } from './Types/Category'
 import { ProductType } from './Types/Product'
@@ -56,7 +57,7 @@ function App() {
     }
     getUser()
   }, [])
-  
+
   const onHandleAdd = async (product: ProductType) => {
     const {data} = await create(product)
     setProducts([...products, data]);
@@ -112,6 +113,7 @@ function App() {
             </Route>
           <Route path='details_product/:id' element={<ProductDetail />}></Route>
           <Route path='cart' element={<Cart />}></Route>
+          <Route path='profile' element={<Profile />}></Route>
           </Route>
 
           <Route path='/admin' element={<PrivateRouter><WebsiteAdmin /></PrivateRouter>}>

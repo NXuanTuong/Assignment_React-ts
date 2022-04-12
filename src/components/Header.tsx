@@ -1,9 +1,13 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 type Props = {}
 
 const Header = (props: Props) => {
+    let cart = []
+    if (localStorage.getItem("cart")) {
+        cart = JSON.parse(localStorage.getItem("cart"))
+    }
     const navigate = useNavigate()
     const logout = () => {
         localStorage.removeItem("user")
@@ -32,9 +36,11 @@ const Header = (props: Props) => {
                     {localStorage.getItem("user") ? 
                         <div className="inline-block">
                         <span className="text-black text-base font-semibol">
-                        <i className="fas fa-user px-4" /> 
-                        <span>
-                            {JSON.parse(localStorage.getItem("user") as string)?.email}</span> 
+                        <i className="fas fa-user px-4" />
+                        <Link to="profile">
+                                <span>
+                                {JSON.parse(localStorage.getItem("user") as string)?.email}</span> 
+                        </Link> 
                         <span>/</span> 
                         <div>
                             <div onClick={() => logout()} className="hover:text-red-500 cursor-pointer">Logout</div>
@@ -58,7 +64,7 @@ const Header = (props: Props) => {
                     <li className="list-item"><a href="/cart">
                         <span className="text-black relative text-lg font-semibol px-4 py-3 cursor-pointer">
                         <i className="fas fa-shopping-cart" />
-                        <div id="cartID" className="boder absolute border-red-500 bg-red-500 rounded-full px-2 py-1 -top-[2px] right-[5px] text-white text-xs text-center">1</div>
+                        <div id="cartID" className="boder absolute border-red-500 bg-red-500 rounded-full px-2 py-1 -top-[2px] right-[5px] text-white text-xs text-center">{cart.length}</div>
                         </span></a>
                     </li>
                 </ul>

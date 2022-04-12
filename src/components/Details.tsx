@@ -6,6 +6,8 @@ import { ProductType } from '../Types/Product'
 type Props = {}
 
 const Details = (props: Props) => {
+  const [number, setNumber] = useState('')
+  console.log(setNumber);
   const {id} = useParams()
 
   const [products, setProducts] = useState<ProductType>()
@@ -16,6 +18,26 @@ const Details = (props: Props) => {
     }
     getProductId()
   }, [])
+  let cart = []
+
+  if (localStorage.getItem("cart")) {
+    cart = JSON.parse(localStorage.getItem("cart"));
+  }
+  const addCart = (product) => {
+    const existProduct = cart.find((item) => { console.log(item);
+          return item._id == product._id 
+    });
+    const newItem = {...product, quantity: number ? +number : 1, total: product.price * number}
+    if(!existProduct) {
+      cart.push(newItem)
+    } else {
+      console.log(existProduct); 
+      existProduct.quantity += newItem.quantity; 
+      existProduct.total = +existProduct.price
+    }
+    localStorage.setItem("cart", JSON.stringify(cart))
+  }
+  
   return (
     <div>
           <div className="bg-[#eff5f8] block">
@@ -67,10 +89,11 @@ const Details = (props: Props) => {
                   <span className="text-xl font-semibold">Số lượng: </span>
                 </div>
                 <div className="mt-2 text-center">
-                  <input type="number" id="numberProduct" min={1} defaultValue={1} className="border w-40 p-2 border-[#6456d5] rounded-xl outline-none" />
+                  <input type="number" onChange={event => setNumber(event.target.value)} min={1} defaultValue={1} className="border w-40 p-2 border-[#6456d5] rounded-xl outline-none" />
                 </div>
+
                 <div className="mt-10 px-2 py-3 text-center bg-[#6456d5] cursor-pointer text-white rounded-lg w-full">
-                  <button id="btnAddtoCart" className="text-lg">Add to cart</button>
+                  <button onClick={() => addCart(products)} id="btnAddtoCart" className="text-lg">Add to cart</button>
                 </div>
                 <div className="mt-10">
                   <p className="text-base font-semibold mb-4">Description</p>

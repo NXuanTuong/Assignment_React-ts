@@ -3,6 +3,10 @@ import React from 'react'
 type Props = {}
 
 const Cart = (props: Props) => {
+    let cart = []
+    if (localStorage.getItem("cart")) {
+        cart = JSON.parse(localStorage.getItem("cart"))
+    }
   return (
     <div>
         <div className="bg-[#eff5f8] block">
@@ -11,7 +15,12 @@ const Cart = (props: Props) => {
                 <li className="inline-block"><span className="px-1 text-lg font-medium text-[#8d979d] py-3">&gt;</span></li>
                 <li className="inline-block"><a className="px-1 text-lg font-medium text-black py-3" href="/cart">Shopping Cart</a></li>
             </ul>
-            </div>
+        </div>
+            ${cart.length == [] ? 
+                <div>
+                <img className="m-auto" src="https://img.pikbest.com/png-images/20191028/little-boy-pushing-a-shopping-cart-to-buy-things-gif_2515305.png!bw700" alt />
+                </div>
+             :
         <div className="max-w-7xl w-full p-6 m-auto mt-20">
         <div className="content-cart">
             <div className="content-cart-columns">
@@ -36,17 +45,22 @@ const Cart = (props: Props) => {
                     <th />
                     </tr>
                 </thead>
-                <tbody><tr>
-                    <td><img src="${item.image}" className="w-full object-cover max-w-full h-40" /></td>
-                    <td className="text-sm w-52"></td>
-                    <td>
-                        <button data-id="${item.id}" className="btn btn-decrease font-semibold border bg-orange-500 text-white"><i className="bi bi-dash-lg" /></button>
-                        <input className="w-16 text-center px-5 border boder-gray-500 outline-none" type="number" defaultValue="${item.quantity}" />
-                        <button data-id="${item.id}" className="btn btn-increase font-semibold border bg-green-500 text-white"><i className="bi bi-plus-lg" /></button>
-                    </td>
-                    <td>$ </td>
-                    <td><button data-id="${item.id}" className="btn btn-remove"><i className="bi bi-trash-fill" /></button></td>
-                    </tr></tbody>
+                <tbody>
+                    {cart.map((item) => {
+                        return <tr>
+                                <td><img src={`${item.img}`} className="w-full object-cover max-w-full h-40" /></td>
+                                <td className="text-sm w-52">{item.name}</td>
+                                <td>
+                                    <button className="btn btn-decrease font-semibold border bg-orange-500 text-white"><i className="bi bi-dash-lg" /></button>
+                                    <input className="w-16 text-center px-5 border boder-gray-500 outline-none" type="number" value={`${item.quantity}`} />
+                                    <button className="btn btn-increase font-semibold border bg-green-500 text-white"><i className="bi bi-plus-lg" /></button>
+                                </td>
+                                <td>$ {item.price}</td>
+                                <td>$ {item.total}</td>
+                                <td><button data-id="${item.id}" className="btn btn-remove"><i className="bi bi-trash-fill" /></button></td>
+                                </tr>
+                    })}
+                </tbody>
                 </table>
             </div>
             <button className="btn-continue"><a><i className="fas fa-long-arrow-alt-left" /> Tiếp tục xem sản phẩm</a></button>
@@ -85,9 +99,9 @@ const Cart = (props: Props) => {
             </div>
         </div>
         </div>
-
+            }
     </div>
-  )
+    )
 }
 
 export default Cart
