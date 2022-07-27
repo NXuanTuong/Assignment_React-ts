@@ -6,7 +6,7 @@ import { ProductType } from '../../../Types/Product'
 type ProductManagerProps = {
     products: ProductType[]
     onRemove: (id: any) => void
-    categories: CategoryType
+    categories: CategoryType[]
 }
 
 const ProductManager = ({products, categories, onRemove}: ProductManagerProps) => {

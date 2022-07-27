@@ -63,7 +63,7 @@ function App() {
     setProducts([...products, data]);
   }
 
-  const onHandRemove = async (id: string) => {
+  const onHandRemove = async (id: any) => {
     remove(id)
 
     setProducts(products.filter(item => item._id !== id))
