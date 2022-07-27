@@ -21,7 +21,7 @@ export const updateCate = (category: CategoryType) => {
     return instance.put(url, category)
 }
 
-export const readCate = (id: string) => {
+export const readCate = (id: any) => {
     const url = `category/${id}`
     return instance.get(url)
 }

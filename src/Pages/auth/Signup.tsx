@@ -17,7 +17,7 @@ const Signup = (props: SignupProps) => {
     const {register, handleSubmit, formState: {errors}} = useForm<Inputs>()
     const navigate = useNavigate()
 
-    const onSubmit : SubmitHandler<Inputs> = (dataInput) => {
+    const onSubmit : SubmitHandler<Inputs> = (dataInput: any) => {
         props.onSignup(dataInput)
 
         navigate("/signin")

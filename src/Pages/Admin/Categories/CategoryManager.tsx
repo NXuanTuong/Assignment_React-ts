@@ -4,7 +4,7 @@ import { CategoryType } from '../../../Types/Category'
 
 type CategoryManagerProps = {
     category: CategoryType[]
-    onRemoveCate: (id: string) => void
+    onRemoveCate: (id: any) => void
 }
 
 const CategoryManager = (props: CategoryManagerProps) => {

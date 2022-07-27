@@ -17,7 +17,7 @@ export const getAll = () => {
     return instance.get(url)
 }
 
-export const readUser = (id: string) => {
+export const readUser = (id: any) => {
     const url = `user/${id}`
     return instance.get(url)
 }

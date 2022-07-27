@@ -5,8 +5,8 @@ import { ProductType } from '../../../Types/Product'
 
 type ProductManagerProps = {
     products: ProductType[]
-    onRemove: (id: string) => void
-    categories: CategoryType[]
+    onRemove: (id: any) => void
+    categories: CategoryType
 }
 
 const ProductManager = ({products, categories, onRemove}: ProductManagerProps) => {
@@ -134,7 +134,7 @@ const ProductManager = ({products, categories, onRemove}: ProductManagerProps) =
                                 <td className="p-4 whitespace-nowrap text-center text-base font-normal text-gray-900"> {item.desc}
                                 </td>
 
-                                <td className="p-4 whitespace-nowrap text-center text-base font-normal text-gray-900"> {item.category.name}
+                                <td className="p-4 whitespace-nowrap text-center text-base font-normal text-gray-900"> {item.category?.name}
                                 </td>
 
                                 <td className="whitespace-nowrap space-x-2">

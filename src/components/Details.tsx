@@ -5,29 +5,28 @@ import { ProductType } from '../Types/Product'
 
 type Props = {}
 
-const Details = (props: Props) => {
+const Details = (props: Props,) => {
   const [number, setNumber] = useState('')
-  console.log(setNumber);
-  const {id} = useParams()
+  const _id = useParams().id
 
   const [products, setProducts] = useState<ProductType>()
   useEffect(() => {
     const getProductId = async () => {
-      const {data} = await read(id)
+      const {data} = await read(_id)
       setProducts(data)
     }
     getProductId()
-  }, [])
-  let cart = []
+  }, [_id])
+  let cart: any[] = [] 
 
   if (localStorage.getItem("cart")) {
-    cart = JSON.parse(localStorage.getItem("cart"));
+    cart = JSON.parse(localStorage.getItem("cart") as string);
   }
-  const addCart = (product) => {
+  const addCart = (product : any) => {
     const existProduct = cart.find((item) => { console.log(item);
           return item._id == product._id 
     });
-    const newItem = {...product, quantity: number ? +number : 1, total: product.price * number}
+    const newItem = {...product, quantity: number ? +number : 1, total: product.price * parseInt(number)}
     if(!existProduct) {
       cart.push(newItem)
     } else {

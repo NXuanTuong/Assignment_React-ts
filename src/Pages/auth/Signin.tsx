@@ -13,7 +13,7 @@ type Props = {}
 const Signin = (props: Props) => {
     const {register, handleSubmit, formState: {errors}} = useForm<Inputs>()
     const navigate = useNavigate()
-    const onSubmit : SubmitHandler<Inputs> = async (dataInput) => {
+    const onSubmit : SubmitHandler<Inputs> = async (dataInput : any) => {
         const {data} = await signin(dataInput)
         if(data) {
             localStorage.setItem("user", JSON.stringify(data.user))

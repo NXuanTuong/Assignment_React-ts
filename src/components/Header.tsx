@@ -6,7 +6,7 @@ type Props = {}
 const Header = (props: Props) => {
     let cart = []
     if (localStorage.getItem("cart")) {
-        cart = JSON.parse(localStorage.getItem("cart"))
+        cart = JSON.parse(localStorage.getItem("cart") as string)
     }
     const navigate = useNavigate()
     const logout = () => {
@@ -23,11 +23,11 @@ const Header = (props: Props) => {
                 </div>
                 <div className="block">
                 <ul className="list-none m-0 p-0">
-                    <li className="inline-block relative z-10"><a className="text-[#141517] text-lg font-semibold block font-['Josefin Sans','sans-serif'] px-5 py-10 capitalize hover:text-red-500 transition-all delay-200 ease-out outline-none cursor-pointer" href="/">Home</a></li>
-                    <li className="inline-block relative z-10"><a className="text-[#141517] text-lg font-semibold block font-['Josefin Sans','sans-serif'] px-5 py-10 capitalize hover:text-red-500 transition-all delay-200 ease-out outline-none cursor-pointer" href="/product">Shop</a></li>
-                    <li className="inline-block relative z-10"><a className="text-[#141517] text-lg font-semibold block font-['Josefin Sans','sans-serif'] px-5 py-10 capitalize hover:text-red-500 transition-all delay-200 ease-out outline-none cursor-pointer" href="/about">About</a></li>
-                    <li className="inline-block relative z-10"><a className="text-[#141517] text-lg font-semibold block font-['Josefin Sans','sans-serif'] px-5 py-10 capitalize hover:text-red-500 transition-all delay-200 ease-out outline-none cursor-pointer" href="/blog">Blog</a></li>
-                    <li className="inline-block relative z-10"><a className="text-[#141517] text-lg font-semibold block font-['Josefin Sans','sans-serif'] px-5 py-10 capitalize hover:text-red-500 transition-all delay-200 ease-out outline-none cursor-pointer" href="/contact">Contact</a></li>
+                    <li className="inline-block relative z-10"><Link className="text-[#141517] text-lg font-semibold block font-['Josefin Sans','sans-serif'] px-5 py-10 capitalize hover:text-red-500 transition-all delay-200 ease-out outline-none cursor-pointer" to="/">Home</Link></li>
+                    <li className="inline-block relative z-10"><Link className="text-[#141517] text-lg font-semibold block font-['Josefin Sans','sans-serif'] px-5 py-10 capitalize hover:text-red-500 transition-all delay-200 ease-out outline-none cursor-pointer" to="/product">Shop</Link></li>
+                    <li className="inline-block relative z-10"><Link className="text-[#141517] text-lg font-semibold block font-['Josefin Sans','sans-serif'] px-5 py-10 capitalize hover:text-red-500 transition-all delay-200 ease-out outline-none cursor-pointer" to="/about">About</Link></li>
+                    <li className="inline-block relative z-10"><Link className="text-[#141517] text-lg font-semibold block font-['Josefin Sans','sans-serif'] px-5 py-10 capitalize hover:text-red-500 transition-all delay-200 ease-out outline-none cursor-pointer" to="/blog">Blog</Link></li>
+                    <li className="inline-block relative z-10"><Link className="text-[#141517] text-lg font-semibold block font-['Josefin Sans','sans-serif'] px-5 py-10 capitalize hover:text-red-500 transition-all delay-200 ease-out outline-none cursor-pointer" to="/contact">Contact</Link></li>
                 </ul>
                 </div>
                 <div>
@@ -51,10 +51,10 @@ const Header = (props: Props) => {
                         <span className="text-black text-base font-semibol px-4 py-3">
                         <i className="fas fa-user px-4" /> 
                         <span>
-                            <a href="/signin" className="hover:text-red-500 cursor-pointer">Sign in</a></span> 
+                            <Link to="/signin" className="hover:text-red-500 cursor-pointer">Sign in</Link></span> 
                         <span>/</span> 
                         <span>
-                            <a href="/signup" className="hover:text-red-500 cursor-pointer">Create account</a>
+                            <Link to="/signup" className="hover:text-red-500 cursor-pointer">Create account</Link>
                         </span> 
                         </span>
                         </div>
