@@ -112,7 +112,7 @@ function App() {
               <Route index element={<ContactPage />}></Route>
             </Route>
           <Route path='details_product/:id' element={<ProductDetail />}></Route>
-          <Route path='#/cart' element={<Cart />}></Route>
+          <Route path='cart' element={<Cart />}></Route>
           <Route path='profile' element={<Profile />}></Route>
           </Route>
 

@@ -1,0 +1,76 @@
+{
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/"
+    },
+    {
+      "src": "/product",
+      "dest": "/"
+    },
+    {
+      "src": "/details_product/(.*)",
+      "dest": "/"
+    },
+    {
+      "src": "/blog",
+      "dest": "/"
+    },
+    {
+      "src": "/about",
+      "dest": "/"
+    },
+    {
+      "src": "/contact",
+      "dest": "/"
+    },
+    {
+      "src": "/signup",
+      "dest": "/"
+    },
+    {
+      "src": "/signin",
+      "dest": "/"
+    },
+    {
+      "src": "/cart",
+      "dest": "/"
+    },
+    {
+      "src": "/profile",
+      "dest": "/"
+    },
+    {
+      "src": "/admin",
+      "dest": "/"
+    },
+    {
+      "src": "/admin/products",
+      "dest": "/"
+    },
+    {
+      "src": "/admin/products/(.*)",
+      "dest": "/"
+    },
+    {
+      "src": "/admin/category",
+      "dest": "/"
+    },
+    {
+      "src": "/admin/category/(.*)",
+      "dest": "/"
+    },
+    {
+      "src": "/admin/dasboard",
+      "dest": "/"
+    },
+    {
+      "src": "/admin/users",
+      "dest": "/"
+    },
+    {
+      "src": "/admin/users/(.*)",
+      "dest": "/"
+    }
+  ]
+}
