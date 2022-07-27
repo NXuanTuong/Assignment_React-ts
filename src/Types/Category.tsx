@@ -1,4 +1,4 @@
 export type CategoryType = {
-    _id?: string,
-    name?: string
+    _id?: any,
+    name: string
 }

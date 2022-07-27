@@ -79,7 +79,7 @@ function App() {
     setUser([...users, data])
   }
 
-  const onHandRemoveCate = async (id: string) => {
+  const onHandRemoveCate = async (id: any) => {
     removeCate(id)
 
     setCategories(categories.filter(item => item._id !== id))
